@@ -6,3 +6,22 @@
     width: 100%;
     margin: 0;
 }
+
+/*@media screen and (min-width: 900px) {
+
+}
+
+@media screen and (min-width: 900px) and (max-width: 900px) {
+
+}*/
+
+@media screen and (max-width: 600px) {
+    .profile-info__description {
+        width: 100%;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 17px;
+        text-align: center;
+        margin: 0;
+    }
+}

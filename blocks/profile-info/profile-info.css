@@ -1,3 +1,20 @@
 .profile-info {
     margin: 22px auto 25px 30px;
 }
+
+@media screen and (min-width: 900px) {
+
+}
+
+@media screen and (min-width: 600px) and (max-width: 900px) {
+    .profile-info {
+        margin: 18px auto 38px 30px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .profile-info {
+        width: 100%;
+        margin: 22.25px auto 36px;
+    }
+}

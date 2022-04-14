@@ -7,3 +7,9 @@
     overflow: hidden;
     background: #FFFFFF;
 }
+
+@media screen and (max-width: 600px) {
+    .element {
+        margin-bottom: 20px;
+    }
+}

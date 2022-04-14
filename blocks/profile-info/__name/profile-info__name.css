@@ -7,3 +7,20 @@
     margin: 0 auto 16px 0;
 
 }
+
+/*@media screen and (min-width: 900px) {
+
+}
+
+@media screen and (min-width: 900px) and (max-width: 900px) {
+
+}*/
+
+@media screen and (max-width: 600px) {
+    .profile-info__name {
+        font-weight: 500;
+        font-size: 27px;
+        line-height: 33px;
+        margin: 0 auto 14px 46px;
+    }
+}

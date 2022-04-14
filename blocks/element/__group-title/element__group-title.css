@@ -1,0 +1,8 @@
+.element__group-title {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    height: 79px;
+    margin: 0;
+    padding: 0;
+}

@@ -1,0 +1,8 @@
+.pop-up {
+    width: 510px;
+    /*margin: 0 auto;
+    display: none;*/
+    position: fixed;
+    top: 155px;
+    left: calc(50% - 255px);
+}

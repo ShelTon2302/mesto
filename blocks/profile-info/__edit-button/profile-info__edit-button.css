@@ -10,13 +10,10 @@
     margin: 15px 0 auto 25px;
 }
 
-/*@media screen and (min-width: 900px) {
-
+.profile-info__edit-button:hover {
+    opacity: 0.6;
+    cursor: url(../../../images/cursor-hover.svg), pointer;
 }
-
-@media screen and (min-width: 900px) and (max-width: 900px) {
-
-}*/
 
 @media screen and (max-width: 600px) {
     .profile-info__edit-button {

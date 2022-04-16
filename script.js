@@ -12,8 +12,8 @@ let popupDescription = content.querySelector('.pop-up__input_type_description')
 
 function enablePopUp() {
     popup.classList.remove('overlay_display_none');
-    popupName.setAttribute('placeholder', profileName.textContent)
-    popupDescription.setAttribute('placeholder', profileDescription.textContent)
+    popupName.value = profileName.textContent;
+    popupDescription.value = profileDescription.textContent;
 }
 
 function disablePopUp() {

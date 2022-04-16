@@ -1,6 +1,26 @@
 .pop-up__close {
-    width: 32px;
-    height: 32px;
     background-image: url(../../../images/Close\ Icon.svg);
+    background-size: cover;
     margin: 0 0 8px auto;
+}
+
+.pop-up__close:hover {
+    opacity: 0.6;
+    cursor: url(../../../images/cursor-hover.svg), pointer;
+}
+
+@media screen and (min-width: 600px) {
+    .pop-up__close {
+        width: 32px;
+        height: 32px;
+        margin: 0 0 8px auto;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .pop-up__close {
+        width: 20px;
+        height: 20px;
+        margin: 0 0 19px auto;
+    }
 }

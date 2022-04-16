@@ -1,10 +1,24 @@
 .pop-up__button-text {
-    width: 109px;
-    height: 18px;
     font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
     text-align: center;
     color: #FFFFFF;
-    margin: 14px auto 18px;
+    position: relative;
+}
+
+@media screen and (min-width: 600px) {
+    .pop-up__button-text {
+        width: 109px;
+        font-size: 18px;
+        line-height: 22px;
+        margin: 14px auto 18px;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .pop-up__button-text {
+        width: 109px;
+        font-size: 14px;
+        line-height: 17px;
+        margin: 14px auto 14px;
+    }
 }

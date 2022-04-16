@@ -8,11 +8,13 @@
     box-sizing: border-box;
     border: 1px solid #FFF;
     margin: 15px 0 auto 25px;
+    background-color: #000;
+    padding: 0;
 }
 
 .profile-info__edit-button:hover {
     opacity: 0.6;
-    cursor: url(../../../images/cursor-hover.svg), pointer;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 600px) {

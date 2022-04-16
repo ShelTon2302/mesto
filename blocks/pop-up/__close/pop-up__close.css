@@ -1,19 +1,21 @@
 .pop-up__close {
     background-image: url(../../../images/Close\ Icon.svg);
     background-size: cover;
-    margin: 0 0 8px auto;
+    background-color: #000;
+    border: none;
+    padding: 0;
 }
 
 .pop-up__close:hover {
     opacity: 0.6;
-    cursor: url(../../../images/cursor-hover.svg), pointer;
+    cursor: pointer;
 }
 
 @media screen and (min-width: 600px) {
     .pop-up__close {
         width: 32px;
         height: 32px;
-        margin: 0 0 8px auto;
+        margin: 0 0 8px 478px;
     }
 }
 
@@ -21,6 +23,6 @@
     .pop-up__close {
         width: 20px;
         height: 20px;
-        margin: 0 0 19px auto;
+        margin: 0 0 19px 262px;
     }
 }

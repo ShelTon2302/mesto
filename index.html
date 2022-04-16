@@ -19,12 +19,25 @@
         <div class="profile-info">
           <div class="profile-info__group">
             <p class="profile-info__name">Жак-Ив Кусто</p>
-            <div class="profile-info__edit-button"></div>
+            <button class="profile-info__edit-button"></button>
           </div>
           <p class="profile-info__description">Исследователь океана</p>
         </div>
-        <div class="profile__add-button"></div>
+        <button class="profile__add-button"></button>
       </section>
+      <div class="overlay overlay_display_none">
+        <div class="pop-up">
+          <button class="pop-up__close"></button>
+          <div class="pop-up__group">
+             <h2 class="pop-up__title">Редактировать профиль</h2>
+             <input type="text" placeholder="Жак-Ив Кусто" class="pop-up__input pop-up__input_type_name">
+             <div class="pop-up__line"></div>
+             <input type="text" placeholder="Исследователь океана" class="pop-up__input pop-up__input_type_description">
+             <div class="pop-up__line"></div>
+             <button class="pop-up__button">Сохранить</button>
+          </div>
+        </div>
+      </div>
       <section class="elements">
         <div class="element">
           <div class="element__image">
@@ -85,24 +98,6 @@
     <footer class="footer">
       <p class="footer__title">© 2020 Mesto Russia</p>
     </footer>
-    <div class="overlay">
-        <div class="pop-up">
-          <div class="pop-up__close"></div>
-          <div class="pop-up__group">
-             <h2 class="pop-up__title">Редактировать профиль</h2>
-             <input type="text" placeholder="Жак-Ив Кусто" class="pop-up__input pop-up__input_type_name">
-             <div class="pop-up__line"></div>
-             <input type="text" placeholder="Исследователь океана" class="pop-up__input pop-up__input_type_description">
-             <div class="pop-up__line"></div>
-             <div class="pop-up__button">
-               <a class="pop-up__button-link" href="#">
-                <p class="pop-up__button-text">Сохранить</p>
-               </a>
-               <!--<p class="pop-up__button-text">Сохранить</p>-->
-             </div>
-          </div>
-        </div>
-      </div>
-  </div>
+    </div>
   <script src="script.js"></script>
 </body>

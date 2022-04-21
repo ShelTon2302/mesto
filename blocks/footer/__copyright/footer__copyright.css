@@ -1,4 +1,4 @@
-.footer__title {
+.footer__copyright {
     font-weight: 400;
     font-size: 18px;
     line-height: 22px;
@@ -7,17 +7,8 @@
     padding-bottom: 60px;
 }
 
-/*@media screen and (min-width: 900px) {
-
-}
-
-@media screen and (min-width: 900px) and (max-width: 900px) {
-
-}*/
-
 @media screen and (max-width: 600px) {
-    .footer__title {
-        width: 100%;
+    .footer__copyright {
         font-size: 14px;
         line-height: 17px;
         text-align: left;

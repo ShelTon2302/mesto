@@ -1,27 +1,25 @@
 .profile-info__description {
     font-weight: 400;
-    font-size: 18px;
-    line-height: 22px;
     color: #FFFFFF;
     width: 100%;
     margin: 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
-/*@media screen and (min-width: 900px) {
-
+@media screen and (min-width: 600px) {
+    .profile-info__description {
+        font-size: 18px;
+        line-height: 22px;
+        width: 336px;
+    }
 }
-
-@media screen and (min-width: 900px) and (max-width: 900px) {
-
-}*/
 
 @media screen and (max-width: 600px) {
     .profile-info__description {
-        width: 100%;
-        font-weight: 400;
         font-size: 14px;
         line-height: 17px;
         text-align: center;
-        margin: 0;
     }
 }

@@ -1,0 +1,18 @@
+.popup__input {
+    border: none;
+    width: 100%;
+    padding: 13px 0;
+    border-bottom: 1px solid #000000;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+}
+
+.popup__input:nth-child(2) {
+    margin-top: 17px;
+}
+
+.popup__input:focus {
+    border: 1px;
+}

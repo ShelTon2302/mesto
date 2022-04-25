@@ -1,8 +1,9 @@
 .popup__input {
     border: none;
     width: 100%;
-    padding: 13px 0;
-    border-bottom: 1px solid #000000;
+    padding: 9px 0;
+    border-bottom: 1px solid rgba(0, 0, 0, .2);
+    margin-bottom: 21px;
     font-weight: 400;
     font-size: 14px;
     line-height: 17px;
@@ -10,7 +11,7 @@
 }
 
 .popup__input:nth-child(2) {
-    margin-top: 17px;
+    margin-bottom: 0;
 }
 
 .popup__input:focus {

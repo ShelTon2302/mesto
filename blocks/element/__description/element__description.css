@@ -1,7 +1,6 @@
 .element__description {
     display: flex;
     width: 100%;
-    height: 79px;
-    margin: 0;
+    margin: -.391px 0 0;
     padding: 0;
 }

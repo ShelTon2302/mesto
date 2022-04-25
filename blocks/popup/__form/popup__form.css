@@ -1,15 +1,11 @@
-.popup__form {
-
-}
-
 @media screen and (min-width: 600px) {
     .popup__form {
-        margin: 41px 36px 37px;
+        margin: 39px 36px 37px;
     }
 }
 
 @media screen and (max-width: 600px) {
     .popup__form {
-        margin: 62px 22px 25px;
+        margin: 65px 22px 25px;
     }
 }

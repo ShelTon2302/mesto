@@ -5,6 +5,7 @@ let profileDescription = content.querySelector('.profile-info__description');
 let addButton = content.querySelector('.profile__add-button');
 let elements = content.querySelector('.elements');
 let elementLike;
+let elementTrash;
 let popupEditProfile = document.querySelector('.popup-edit-profile');
 let formEditProfile = popupEditProfile.querySelector('.popup-edit-profile__form');
 let closeEditProfileButton = popupEditProfile.querySelector('.popup-edit-profile__close-button');
@@ -52,9 +53,11 @@ function startElement() {
         elements.append(startElement);
     }
     elementLike = elements.querySelectorAll('.element__like');
-    /*for (let i = 0; i < elementLike.length; i++) {
-        elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve))
-    };*/
+    elementTrash = elements.querySelectorAll('.element__trash');
+    for (let i = 0; i < elementLike.length; i++) {
+        elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve));
+        elementTrash[i].addEventListener('click', (eve) => elementRemove(eve));
+    };
 }
 
 function enablePopupEditProfile() {
@@ -91,23 +94,23 @@ function addElementFormSubmitHandler (evt) {
     elements.prepend(addElement);
     elementLike = elements.querySelectorAll('.element__like');
     elementLike[0].addEventListener('click', (eve) => changeLikeElementStatus(eve))
-    /*for (let i = 0; i < elementLike.length; i++) {
-        elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve))
-    };*/
+    elementTrash[0].addEventListener('click', (eve) => elementRemove(eve))
     disablePopup(popupAddElement);
 }
 
 function changeLikeElementStatus(eve) {
-    console.log(eve.target);
-        console.log(eve.target.classList);
         if (eve.target.classList.contains('element__like_active')) {
             eve.target.classList.remove('element__like_active');
         }
         else {
             eve.target.classList.add('element__like_active');
         };
-        console.log(eve.target.classList);
-        console.log(elementLike);
+}
+
+function elementRemove(eve) {
+    console.log(eve.path[1]);
+    eve.path[1].remove();
+
 }
 
 startElement();
@@ -117,7 +120,7 @@ closeEditProfileButton.addEventListener('click', () => disablePopup(popupEditPro
 closeAddElementButton.addEventListener('click', () => disablePopup(popupAddElement));
 formEditProfile.addEventListener('submit', editProfileFormSubmitHandler);
 formAddElement.addEventListener('submit', addElementFormSubmitHandler);
-for (let i = 0; i < elementLike.length; i++) {
+/*for (let i = 0; i < elementLike.length; i++) {
     elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve));
 }
 
@@ -130,5 +133,5 @@ for (let i = 0; i < elementLike.length; i++) {
 
 
 
-elementLike = elements.querySelectorAll('.element__like');
-console.log(elementLike);*/
+elementLike = elements.querySelectorAll('.element__like');*/
+console.log(elementTrash);

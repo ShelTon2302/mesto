@@ -122,35 +122,18 @@ function elementRemove(eve) {
 }
 
 function popupImgEnable(eve) {
-    console.log(eve);
-    console.log(eve.path[0].src);
-    console.log(eve.path[1].children[2].children[0].textContent);
     popupImgImg.src = eve.path[0].src;
     popupImgImg.alt = eve.path[1].children[2].children[0].textContent;
     popupImgDescription.textContent = eve.path[1].children[2].children[0].textContent;
     popupImg.classList.add('popup_visible');
 }
 
-console.log(popupImg);
 startElement();
 editButton.addEventListener('click', enablePopupEditProfile);
 addButton.addEventListener('click', enablePopupAddElement);
 closeEditProfileButton.addEventListener('click', () => disablePopup(popupEditProfile));
 closeAddElementButton.addEventListener('click', () => disablePopup(popupAddElement));
 closeImgButton.addEventListener('click', () => disablePopup(popupImg));
+popupImgImg.addEventListener('click', () => disablePopup(popupImg));
 formEditProfile.addEventListener('submit', editProfileFormSubmitHandler);
 formAddElement.addEventListener('submit', addElementFormSubmitHandler);
-/*for (let i = 0; i < elementLike.length; i++) {
-    elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve));
-}
-
-
-
-
-
-
-/*elements.addEventListener("click", event => clickElementButton(event.this));
-
-
-
-elementLike = elements.querySelectorAll('.element__like');*/

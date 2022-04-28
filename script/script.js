@@ -7,18 +7,18 @@ let elements = content.querySelector('.elements');
 let elementLike;
 let elementTrash;
 let elementImg;
-let popupEditProfile = document.querySelector('.popup-edit-profile');
-let formEditProfile = popupEditProfile.querySelector('.popup-edit-profile__form');
-let closeEditProfileButton = popupEditProfile.querySelector('.popup-edit-profile__close-button');
-let popupEditProfileName = popupEditProfile.querySelector('.popup-edit-profile__input_type_name');
-let popupEditProfileDescription = popupEditProfile.querySelector('.popup-edit-profile__input_type_description');
-let popupAddElement = document.querySelector('.popup-add-element');
-let formAddElement = popupAddElement.querySelector('.popup-add-element__form');
-let closeAddElementButton = popupAddElement.querySelector('.popup-add-element__close-button');
-let popupAddElementName = popupAddElement.querySelector('.popup-add-element__input_type_name');
-let popupAddElementSrc = popupAddElement.querySelector('.popup-add-element__input_type_src');
-let popupImg = document.querySelector('.popup-img');
-let closeImgButton = popupImg.querySelector('.popup-img__close-button');
+let popupEditProfile = document.querySelector('.popup_profile');
+let formEditProfile = popupEditProfile.querySelector('.popup__form_profile');
+let closeEditProfileButton = popupEditProfile.querySelector('.popup__close-button_profile');
+let popupEditProfileName = popupEditProfile.querySelector('.popup__input_profile_name');
+let popupEditProfileDescription = popupEditProfile.querySelector('.popup__input_profile_description');
+let popupAddElement = document.querySelector('.popup_add-element');
+let formAddElement = popupAddElement.querySelector('.popup__form_add-element');
+let closeAddElementButton = popupAddElement.querySelector('.popup__close-button_add-element');
+let popupAddElementName = popupAddElement.querySelector('.popup__input_element_name');
+let popupAddElementSrc = popupAddElement.querySelector('.popup__input_element_src');
+let popupImg = document.querySelector('.popup_img');
+let closeImgButton = popupImg.querySelector('.popup__close-button_img');
 let popupImgImg = popupImg.querySelector('.popup__img');
 let popupImgDescription = popupImg.querySelector('.popup__description');
 
@@ -69,20 +69,36 @@ function startElement() {
     };
 }
 
+function changeLikeElementStatus(eve) {
+    if (eve.target.classList.contains('element__like_active')) {
+        eve.target.classList.remove('element__like_active');
+    }
+    else {
+        eve.target.classList.add('element__like_active');
+    };
+}
+
 function enablePopupEditProfile() {
     popupEditProfileName.value = profileName.textContent;
     popupEditProfileDescription.value = profileDescription.textContent;
     popupEditProfile.classList.add('popup_visible');
 }
 
-function disablePopup(popup) {
-    popup.classList.remove('popup_visible');
-}
-
 function enablePopupAddElement() {
     popupAddElementName.value = '';
     popupAddElementSrc.value = '';
     popupAddElement.classList.add('popup_visible');
+}
+
+function popupImgEnable(eve) {
+    popupImgImg.src = eve.path[0].src;
+    popupImgImg.alt = eve.path[1].children[2].children[0].textContent;
+    popupImgDescription.textContent = eve.path[1].children[2].children[0].textContent;
+    popupImg.classList.add('popup_visible');
+}
+
+function disablePopup(popup) {
+    popup.classList.remove('popup_visible');
 }
 
 function editProfileFormSubmitHandler (evt) {
@@ -108,24 +124,8 @@ function addElementFormSubmitHandler (evt) {
     disablePopup(popupAddElement);
 }
 
-function changeLikeElementStatus(eve) {
-        if (eve.target.classList.contains('element__like_active')) {
-            eve.target.classList.remove('element__like_active');
-        }
-        else {
-            eve.target.classList.add('element__like_active');
-        };
-}
-
 function elementRemove(eve) {
     eve.path[1].remove();
-}
-
-function popupImgEnable(eve) {
-    popupImgImg.src = eve.path[0].src;
-    popupImgImg.alt = eve.path[1].children[2].children[0].textContent;
-    popupImgDescription.textContent = eve.path[1].children[2].children[0].textContent;
-    popupImg.classList.add('popup_visible');
 }
 
 startElement();

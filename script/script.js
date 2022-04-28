@@ -6,6 +6,7 @@ let addButton = content.querySelector('.profile__add-button');
 let elements = content.querySelector('.elements');
 let elementLike;
 let elementTrash;
+let elementImg;
 let popupEditProfile = document.querySelector('.popup-edit-profile');
 let formEditProfile = popupEditProfile.querySelector('.popup-edit-profile__form');
 let closeEditProfileButton = popupEditProfile.querySelector('.popup-edit-profile__close-button');
@@ -16,6 +17,12 @@ let formAddElement = popupAddElement.querySelector('.popup-add-element__form');
 let closeAddElementButton = popupAddElement.querySelector('.popup-add-element__close-button');
 let popupAddElementName = popupAddElement.querySelector('.popup-add-element__input_type_name');
 let popupAddElementSrc = popupAddElement.querySelector('.popup-add-element__input_type_src');
+let popupImg = document.querySelector('.popup-img');
+let closeImgButton = popupImg.querySelector('.popup-img__close-button');
+let popupImgImg = popupImg.querySelector('.popup__img');
+let popupImgDescription = popupImg.querySelector('.popup__description');
+
+
 
 function startElement() {
     const initialCards = [
@@ -54,9 +61,11 @@ function startElement() {
     }
     elementLike = elements.querySelectorAll('.element__like');
     elementTrash = elements.querySelectorAll('.element__trash');
+    elementImg = elements.querySelectorAll('.element__image');
     for (let i = 0; i < elementLike.length; i++) {
         elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve));
         elementTrash[i].addEventListener('click', (eve) => elementRemove(eve));
+        elementImg[i].addEventListener('click', (eve) => popupImgEnable(eve));
     };
 }
 
@@ -93,8 +102,9 @@ function addElementFormSubmitHandler (evt) {
     addElement.querySelector('.element__title').textContent = popupAddElementName.value;
     elements.prepend(addElement);
     elementLike = elements.querySelectorAll('.element__like');
-    elementLike[0].addEventListener('click', (eve) => changeLikeElementStatus(eve))
-    elementTrash[0].addEventListener('click', (eve) => elementRemove(eve))
+    elementLike[0].addEventListener('click', (eve) => changeLikeElementStatus(eve));
+    elementTrash[0].addEventListener('click', (eve) => elementRemove(eve));
+    elementImg[i].addEventListener('click', (eve) => popupImgEnable(eve));
     disablePopup(popupAddElement);
 }
 
@@ -108,16 +118,26 @@ function changeLikeElementStatus(eve) {
 }
 
 function elementRemove(eve) {
-    console.log(eve.path[1]);
     eve.path[1].remove();
-
 }
 
+function popupImgEnable(eve) {
+    console.log(eve);
+    console.log(eve.path[0].src);
+    console.log(eve.path[1].children[2].children[0].textContent);
+    popupImgImg.src = eve.path[0].src;
+    popupImgImg.alt = eve.path[1].children[2].children[0].textContent;
+    popupImgDescription.textContent = eve.path[1].children[2].children[0].textContent;
+    popupImg.classList.add('popup_visible');
+}
+
+console.log(popupImg);
 startElement();
 editButton.addEventListener('click', enablePopupEditProfile);
 addButton.addEventListener('click', enablePopupAddElement);
 closeEditProfileButton.addEventListener('click', () => disablePopup(popupEditProfile));
 closeAddElementButton.addEventListener('click', () => disablePopup(popupAddElement));
+closeImgButton.addEventListener('click', () => disablePopup(popupImg));
 formEditProfile.addEventListener('submit', editProfileFormSubmitHandler);
 formAddElement.addEventListener('submit', addElementFormSubmitHandler);
 /*for (let i = 0; i < elementLike.length; i++) {
@@ -134,4 +154,3 @@ formAddElement.addEventListener('submit', addElementFormSubmitHandler);
 
 
 elementLike = elements.querySelectorAll('.element__like');*/
-console.log(elementTrash);

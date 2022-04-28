@@ -4,7 +4,7 @@ let profileName = content.querySelector('.profile-info__name');
 let profileDescription = content.querySelector('.profile-info__description');
 let addButton = content.querySelector('.profile__add-button');
 let elements = content.querySelector('.elements');
-let element;
+let elementLike;
 let popupEditProfile = document.querySelector('.popup-edit-profile');
 let formEditProfile = popupEditProfile.querySelector('.popup-edit-profile__form');
 let closeEditProfileButton = popupEditProfile.querySelector('.popup-edit-profile__close-button');
@@ -51,6 +51,10 @@ function startElement() {
         startElement.querySelector('.element__title').textContent = initialCards[i].name;
         elements.append(startElement);
     }
+    elementLike = elements.querySelectorAll('.element__like');
+    /*for (let i = 0; i < elementLike.length; i++) {
+        elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve))
+    };*/
 }
 
 function enablePopupEditProfile() {
@@ -59,8 +63,8 @@ function enablePopupEditProfile() {
     popupEditProfile.classList.add('popup_visible');
 }
 
-function disablePopupEditProfile() {
-    popupEditProfile.classList.remove('popup_visible');
+function disablePopup(popup) {
+    popup.classList.remove('popup_visible');
 }
 
 function enablePopupAddElement() {
@@ -69,15 +73,11 @@ function enablePopupAddElement() {
     popupAddElement.classList.add('popup_visible');
 }
 
-function disablePopupAddElement() {
-    popupAddElement.classList.remove('popup_visible');
-}
-
 function editProfileFormSubmitHandler (evt) {
     evt.preventDefault();
     profileName.textContent = popupEditProfileName.value;
     profileDescription.textContent = popupEditProfileDescription.value;
-    disablePopupEditProfile();
+    disablePopup(popupEditProfile);
 }
 
 function addElementFormSubmitHandler (evt) {
@@ -89,15 +89,46 @@ function addElementFormSubmitHandler (evt) {
     addElement.querySelector('.element__image').alt = popupAddElementName.value;
     addElement.querySelector('.element__title').textContent = popupAddElementName.value;
     elements.prepend(addElement);
-    disablePopupAddElement();
+    elementLike = elements.querySelectorAll('.element__like');
+    elementLike[0].addEventListener('click', (eve) => changeLikeElementStatus(eve))
+    /*for (let i = 0; i < elementLike.length; i++) {
+        elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve))
+    };*/
+    disablePopup(popupAddElement);
+}
+
+function changeLikeElementStatus(eve) {
+    console.log(eve.target);
+        console.log(eve.target.classList);
+        if (eve.target.classList.contains('element__like_active')) {
+            eve.target.classList.remove('element__like_active');
+        }
+        else {
+            eve.target.classList.add('element__like_active');
+        };
+        console.log(eve.target.classList);
+        console.log(elementLike);
 }
 
 startElement();
 editButton.addEventListener('click', enablePopupEditProfile);
 addButton.addEventListener('click', enablePopupAddElement);
-closeEditProfileButton.addEventListener('click', disablePopupEditProfile);
-closeAddElementButton.addEventListener('click', disablePopupAddElement);
+closeEditProfileButton.addEventListener('click', () => disablePopup(popupEditProfile));
+closeAddElementButton.addEventListener('click', () => disablePopup(popupAddElement));
 formEditProfile.addEventListener('submit', editProfileFormSubmitHandler);
 formAddElement.addEventListener('submit', addElementFormSubmitHandler);
+for (let i = 0; i < elementLike.length; i++) {
+    elementLike[i].addEventListener('click', (eve) => changeLikeElementStatus(eve));
+}
 
-console.log(element);
+
+
+
+
+
+/*elements.addEventListener("click", event => clickElementButton(event.this));
+
+
+
+elementLike = elements.querySelectorAll('.element__like');
+console.log(elementLike);*/

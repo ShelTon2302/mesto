@@ -38,6 +38,10 @@ function addElements (src,name) {
     elements.prepend(addElement(src, name));
 };
 
+function removeElement(eve) {
+    eve.target.closest('.element').remove();
+};
+
 function startElement() {
     for (let i = 0; i < 6; i ++) {
         addElements(initialCards[i].link, initialCards[i].name);
@@ -48,10 +52,6 @@ function changeLikeElementStatus(eve) {
     eve.target.classList.toggle('element__like_active');
 };
 
-function removeElement(eve) {
-    eve.target.closest('.element').remove();
-};
-
 function enablePopup(popup) {
     popup.classList.add('popup_visible');
 };
@@ -60,10 +60,12 @@ function disablePopup(popup) {
     popup.classList.remove('popup_visible');
 };
 
-
 function enablePopupEditProfile() {
     popupEditProfileName.value = profileName.textContent;
     popupEditProfileDescription.value = profileDescription.textContent;
+    const inputList = Array.from(formEditProfile.querySelectorAll('.popup__input'));
+    const buttonElement = formEditProfile.querySelector('.popup__save-button');
+    toggleButtonState(inputList, buttonElement, {inactiveButtonClass: 'popup__save-button_inactive'});
     enablePopup(popupEditProfile);
 };
 

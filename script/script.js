@@ -94,6 +94,9 @@ function enablePopupEditProfile() {
 
 function enablePopupAddElement() {
     formAddElement.reset();
+    const inputList = Array.from(formAddElement.querySelectorAll('.popup__input'));
+    const buttonElement = formAddElement.querySelector('.popup__save-button');
+    toggleButtonState(inputList, buttonElement, {inactiveButtonClass: 'popup__save-button_inactive'});
     enablePopup(popupAddElement);
 };
 

@@ -8,7 +8,6 @@ function enableValidation(obj) {
 const setEventListeners = (formElement, obj) => {
     const inputList = Array.from(formElement.querySelectorAll(obj.inputSelector));
     const buttonElement = formElement.querySelector(obj.submitButtonSelector);
-    console.log(obj.submitButtonSelector);
     toggleButtonState(inputList, buttonElement, obj);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {

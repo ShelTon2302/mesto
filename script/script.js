@@ -28,9 +28,9 @@ function addElement (src, name) {
     cloneElement.querySelector('.element__image').src = src;
     cloneElement.querySelector('.element__image').alt = name;
     cloneElement.querySelector('.element__title').textContent = name;
-    cloneElement.querySelector('.element__like').addEventListener('click', (eve) => changeLikeElementStatus(eve));
-    cloneElement.querySelector('.element__trash').addEventListener('click', (eve) => removeElement(eve));
-    cloneElement.querySelector('.element__image').addEventListener('click', (eve) => enablePopupImg(eve));
+    cloneElement.querySelector('.element__like').addEventListener('click', (evt) => changeLikeElementStatus(evt));
+    cloneElement.querySelector('.element__trash').addEventListener('click', (evt) => removeElement(evt));
+    cloneElement.querySelector('.element__image').addEventListener('click', (evt) => enablePopupImg(evt));
     return cloneElement;
 };
 
@@ -38,8 +38,10 @@ function addElements (src,name) {
     elements.prepend(addElement(src, name));
 };
 
-function removeElement(eve) {
-    eve.target.closest('.element').remove();
+function removeElement(evt) {
+    console.log(evt);
+    console.log(evt.target);
+    evt.target.closest('.element').remove();
 };
 
 function startElement() {
@@ -48,8 +50,8 @@ function startElement() {
     };
 };
 
-function changeLikeElementStatus(eve) {
-    eve.target.classList.toggle('element__like_active');
+function changeLikeElementStatus(evt) {
+    evt.target.classList.toggle('element__like_active');
 };
 
 function enablePopup(popup) {
@@ -58,6 +60,27 @@ function enablePopup(popup) {
 
 function disablePopup(popup) {
     popup.classList.remove('popup_visible');
+};
+
+function disablePopupOverlay(evt, popup) {
+    if (popup === evt.target) {
+        disablePopup(popup);
+    };
+};
+
+function disablePopupEsc(evt) {
+    if (evt.key === 'Escape') {
+        if (popupEditProfile.classList.value.includes('popup_visible')) {
+            disablePopup(popupEditProfile);
+        };
+        if (popupAddElement.classList.value.includes('popup_visible')) {
+            disablePopup(popupAddElement);
+        };
+        if (popupImg.classList.value.includes('popup_visible')) {
+            disablePopup(popupImg);
+        };
+       
+    };
 };
 
 function enablePopupEditProfile() {
@@ -74,10 +97,10 @@ function enablePopupAddElement() {
     enablePopup(popupAddElement);
 };
 
-function enablePopupImg(eve) {
-    popupImgImg.src = eve.target.src;
-    popupImgImg.alt = eve.target.alt;
-    popupImgDescription.textContent = eve.target.alt;
+function enablePopupImg(evt) {
+    popupImgImg.src = evt.target.src;
+    popupImgImg.alt = evt.target.alt;
+    popupImgDescription.textContent = evt.target.alt;
     enablePopup(popupImg);
 };
 
@@ -102,3 +125,7 @@ closeAddElementButton.addEventListener('click', () => disablePopup(popupAddEleme
 closeImgButton.addEventListener('click', () => disablePopup(popupImg));
 formEditProfile.addEventListener('submit', editProfileFormSubmitHandler);
 formAddElement.addEventListener('submit', addElementFormSubmitHandler);
+popupEditProfile.addEventListener('click', (evt) => disablePopupOverlay(evt, popupEditProfile));
+popupAddElement.addEventListener('click', (evt) => disablePopupOverlay(evt, popupAddElement));
+popupImg.addEventListener('click', (evt) => disablePopupOverlay(evt, popupImg));
+document.addEventListener('keydown', (evt) => disablePopupEsc(evt, popupEditProfile));

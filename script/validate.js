@@ -11,13 +11,13 @@ const setEventListeners = (formElement, obj) => {
     toggleButtonState(inputList, buttonElement, obj);
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
-            checkInputValidity(formElement, inputElement);
+            checkInputValidity(formElement, inputElement, obj);
             toggleButtonState(inputList, buttonElement, obj);
         });
     });
 };
 
-const checkInputValidity = (formElement, inputElement) => {
+const checkInputValidity = (formElement, inputElement, obj) => {
     if (!inputElement.validity.valid) {
       showInputError(formElement, inputElement, inputElement.validationMessage, obj);
     } else {

@@ -12,7 +12,7 @@ const setEventListeners = (formElement, obj) => {
     inputList.forEach((inputElement) => {
         inputElement.addEventListener('input', function () {
             checkInputValidity(formElement, inputElement, obj);
-            toggleButtonState(inputList, buttonElement, obj);
+            toggleButtonState(inputList, buttonElement);
         });
     });
 };
@@ -39,11 +39,11 @@ const hideInputError = (formElement, inputElement, obj) => {
     errorElement.textContent = '';
 };
 
-const toggleButtonState = (inputList, buttonElement, obj) => {
+const toggleButtonState = (inputList, buttonElement) => {
     if (hasInvalidInput(inputList)) {
-      buttonElement.classList.add(obj.inactiveButtonClass);
+      buttonElement.setAttribute('disabled', '');
     } else {
-      buttonElement.classList.remove(obj.inactiveButtonClass);
+      buttonElement.removeAttribute('disabled');
     };
 };
 
@@ -57,7 +57,6 @@ enableValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save-button',
-    inactiveButtonClass: 'popup__save-button_inactive',
     inputErrorClass: 'popup__input_type_error',
     errorClass: 'popup__input-error_active'
   }); 

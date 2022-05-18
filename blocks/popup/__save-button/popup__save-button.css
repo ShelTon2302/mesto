@@ -17,6 +17,19 @@
     cursor: pointer;
 }
 
+.popup__save-button:disabled {
+    color: #000;
+    background: #E5E5E5;
+    opacity: 0.2;
+    transition: background 1s ease-out;
+    pointer-events: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+
 @media screen and (min-width: 600px) {
     .popup__save-button {
         width: 358px;

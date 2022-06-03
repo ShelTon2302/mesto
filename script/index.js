@@ -16,10 +16,6 @@ const popupAddElement = document.querySelector('.popup_add-element');
 const formAddElement = popupAddElement.querySelector('.popup__form_add-element');
 const popupAddElementName = popupAddElement.querySelector('.popup__input_element_name');
 const popupAddElementSrc = popupAddElement.querySelector('.popup__input_element_src');
-const popupImg = document.querySelector('.popup_img');
-const popupImgImg = popupImg.querySelector('.popup__img');
-const popupImgDescription = popupImg.querySelector('.popup__description');
-const elementTemplate = document.querySelector('.card-element').content;
 
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
@@ -27,7 +23,7 @@ popups.forEach((popup) => {
             closePopup(popup)
         }
         if (evt.target.classList.contains('popup__close-button')) {
-          closePopup(popup)
+            closePopup(popup)
         }
     })
 })
@@ -35,7 +31,6 @@ popups.forEach((popup) => {
 function renderInitialCards() {
     for (let i = 0; i < 6; i ++) {
         const card = new Card(initialCards[i].link, initialCards[i].name, '.card-element');
-        console.log(card);
         const cardElement = card.generateCard();
 
         // Добавляем в DOM
@@ -46,7 +41,6 @@ function renderInitialCards() {
 function openPopup(popup) {
     popup.classList.add('popup_visible');
     document.addEventListener('keydown', closeByEscape);
-
 };
 
 function closePopup(popup) {

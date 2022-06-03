@@ -30,6 +30,9 @@ const initialCards = [
         this._src = src;
         this._name = name;
         this._template = template;
+        this._popupImg = document.querySelector('.popup_img');
+        this._popupImgImg = this._popupImg.querySelector('.popup__img');
+        this._popupImgDescription = this._popupImg.querySelector('.popup__description');
     }
 
     _getTemplate() {
@@ -63,11 +66,23 @@ const initialCards = [
     };
 
     _openPopupImg() {
-        popupImgImg.src = this._src;
-        popupImgImg.alt = this._name;
-        popupImgDescription.textContent = this._name;
-        openPopup(popupImg);
+        this._popupImgImg.src = this._src;
+        this._popupImgImg.alt = this._name;
+        this._popupImgDescription.textContent = this._name;
+        this._popupImg.classList.add('popup_visible');
+        document.addEventListener('keydown', (evt) => {
+          this._closeByEscape(evt);
+        });
     };
+
+    _closeByEscape(evt) {
+      if (evt.key === 'Escape') {
+        document.removeEventListener('keydown', (evt) => {
+          this._closeByEscape(evt);
+        });
+        this._popupImg.classList.remove('popup_visible');
+      };
+  };
 
     generateCard () {
         this._element = this._getTemplate();

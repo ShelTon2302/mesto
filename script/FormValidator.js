@@ -6,6 +6,7 @@ export class FormValidator {
     this._inputErrorClass = obj.inputErrorClass;
     this._errorClass = obj.errorClass;
     this._formElement = formElement;
+    this.name = this._formElement.name;
   }
 
   _setEventListeners () {
@@ -45,7 +46,7 @@ export class FormValidator {
 
   _toggleButtonState () {
     if (this._hasInvalidInput()) {
-      this._buttonElement.setAttribute('disabled', '');
+      this.disabledButton (this._buttonElement);
     } else {
       this._buttonElement.removeAttribute('disabled');
     };
@@ -57,8 +58,11 @@ export class FormValidator {
     });
   }
 
-  enableValidation() {
-    console.log(this._formElement);
+  disabledButton (buttonElement) {
+    buttonElement.setAttribute('disabled', '');
+  }
+
+  enableValidation () {
     this._setEventListeners();
   }
 }

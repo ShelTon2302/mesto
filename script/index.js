@@ -12,12 +12,15 @@ const addButton = content.querySelector('.profile__add-button');
 const popups = document.querySelectorAll('.popup');
 const popupEditProfile = document.querySelector('.popup_profile')
 const formEditProfile = popupEditProfile.querySelector('.popup__form_profile');
+const editProfileSubmitButton = formEditProfile.querySelector('.popup__save-button');
 const popupEditProfileName = popupEditProfile.querySelector('.popup__input_profile_name');
 const popupEditProfileDescription = popupEditProfile.querySelector('.popup__input_profile_description');
 const popupAddElement = document.querySelector('.popup_add-element');
 const popupAddElementName = popupAddElement.querySelector('.popup__input_element_name');
 const popupAddElementSrc = popupAddElement.querySelector('.popup__input_element_src');
 const formAddElement = popupAddElement.querySelector('.popup__form_add-element');
+const addElementSubmitButton = formAddElement.querySelector('.popup__save-button');
+const formValidators = [];
 
 popups.forEach((popup) => {
     popup.addEventListener('mousedown', (evt) => {
@@ -56,22 +59,26 @@ function submitHandlerEditProfileForm (evt) {
     evt.preventDefault();
     profileName.textContent = popupEditProfileName.value;
     profileDescription.textContent = popupEditProfileDescription.value;
+    formValidators.find(Item => Item.name == 'profile').disabledButton(editProfileSubmitButton);
     closePopup(popupEditProfile);
 };
 
 function submitHandlerAddElementForm (evt) {
     evt.preventDefault();
     elements.prepend(createCard(popupAddElementSrc.value, popupAddElementName.value, '.card-element'));
+    console.log(formAddElement.querySelector('.popup__save-button'));
+    formValidators.find(Item => Item.name == 'element').disabledButton(addElementSubmitButton);
     closePopup(popupAddElement);
 };
 
-function enableValidation(obj) {
+function beginValidation(obj) {
     const formList = Array.from(document.querySelectorAll(obj.formSelector));
     formList.forEach((formElement) => {
         const formValidator = new FormValidator(obj, formElement);
-        formValidator.enableValidation();  
+        formValidators.push(formValidator);
+        formValidator.enableValidation();
     });
-  };
+};
 
 renderInitialCards();
 editButton.addEventListener('click', openPopupEditProfile);
@@ -79,7 +86,7 @@ addButton.addEventListener('click', openPopupAddElement);
 formEditProfile.addEventListener('submit', submitHandlerEditProfileForm);
 formAddElement.addEventListener('submit', submitHandlerAddElementForm);
 
-enableValidation({
+beginValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',
     submitButtonSelector: '.popup__save-button',

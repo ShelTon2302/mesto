@@ -1,3 +1,5 @@
+import '../pages/index.css';
+
 import { Section } from "./Section.js";
 import { Card } from "./Card.js";
 import { initialCards } from "./initialcards.js";

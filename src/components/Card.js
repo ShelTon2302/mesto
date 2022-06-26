@@ -8,7 +8,7 @@
 
     _getTemplate() {
         const cardElement = document
-            .querySelector('.card-element')
+            .querySelector(this._template)
             .content
             .querySelector('.element')
             .cloneNode(true);
@@ -17,17 +17,17 @@
     }
 
     _setEventListeners() {
-        this._element.querySelector('.element__like').addEventListener('click', () => {
+      this._elementLike.addEventListener('click', () => {
           this._changeLikeElementStatus();
         });
-        this._element.querySelector('.element__trash').addEventListener('click', () => {
+        this._elementTrash.addEventListener('click', () => {
           this._removeElement();
         });
         this._elementImage.addEventListener('click', this._handleCardClick);
     }
 
     _changeLikeElementStatus() {
-        this._element.querySelector('.element__like').classList.toggle('element__like_active');
+      this._elementLike.classList.toggle('element__like_active');
     };
 
     _removeElement() {
@@ -37,7 +37,9 @@
 
     generateCard () {
         this._element = this._getTemplate();
-        this._elementImage = this._element.querySelector('.element__image')
+        this._elementImage = this._element.querySelector('.element__image');
+        this._elementLike = this._element.querySelector('.element__like');
+        this._elementTrash = this._element.querySelector('.element__trash');
         this._setEventListeners();
     
         this._element.querySelector('.element__title').textContent = this._name;

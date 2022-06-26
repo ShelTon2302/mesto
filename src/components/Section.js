@@ -1,7 +1,7 @@
 export class Section {
-    constructor ({items, renderer}, containerSelector) {
+    constructor ({items, renderer}, container) {
         this._renderedItems = items;
-        this._container = containerSelector;
+        this._container = container;
         this._renderer = renderer;        
     }
 

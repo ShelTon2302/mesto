@@ -1,16 +1,23 @@
 export class Api {
-    constructor ({baseUrl, headers}) {
+    constructor ({baseUrl, headers}, renderInitCards, addNewCard, deleteOneCard, isLike, notLike) {
         this._UrlProfile = `${baseUrl}/users/me`;
         this._UrlAvatar = `${baseUrl}/users/me/avatar`;
         this._UrlCards = `${baseUrl}/cards`;
         this._headers = headers;
+        this._renderInitCards = renderInitCards;
+        this._addNewCard = addNewCard;
+        this._deleteOneCard = deleteOneCard;
+        this._isLike =isLike;
+        this._notLike = notLike;
+        this._popupProfileButton = document.querySelector('.popup__save-button_profile');
+        this._popupAddCadrButton = document.querySelector('.popup__save-button_add-element');
         this._editProfileName = document.querySelector('.profile-info__name');
         this._editProfileDescription = document.querySelector('.profile-info__description');
         this._avatar = document.querySelector('.profile__avatar');
-        this._myId = '';
     }
 
-    getProfileInfo (callback) {
+    getProfileInfo () {
+        console.log(this._popupProfileButton);
         fetch(this._UrlProfile, {
             headers: this._headers
         })
@@ -28,15 +35,13 @@ export class Api {
                 this._avatar.src = result.avatar;
                 this._myId = result._id;
             })
-            .then(() => {
-                callback();
-            })
             .catch((err) => {
                 console.log(`Загрузка информации профиля не выполнена: ${err}`);
             })
     }
 
     setProfileInfo (formData) {
+        this._renderLoad(this._popupProfileButton, true, 'Создать');
         fetch(this._UrlProfile, {
             method: 'PATCH',
             headers: this._headers,
@@ -55,6 +60,9 @@ export class Api {
             })
             .catch((err) => {
                 console.log(`Данные профиля не установлены: ${err}`);
+            })
+            .finally(() => {
+                this._renderLoad(this._popupProfileButton, false, 'Создать');
             });
     }
 
@@ -79,7 +87,7 @@ export class Api {
             });
     }
 
-    getInitialCards (cardList, callback) {
+    getInitialCards () {
         fetch(this._UrlCards, {
         headers: this._headers
         })
@@ -93,42 +101,21 @@ export class Api {
              })
             .then((result) => {
                 const initialCards = result;
-                console.log(initialCards);
-                callback(cardList, initialCards, this._myId);
+                console.log(initialCards,'1');
+                this.getProfileInfo();
+                return initialCards;
+            })
+            .then((initialCards) => {
+                console.log(initialCards, this._myId);
+                this._renderInitCards(initialCards, this._myId);
             })
             .catch((err) => {
                 console.log(`Загрузка карточек не выполнена: ${err}`);
             })
     }
 
-    //findCard (Data) {
-    //    const card = {};
-    //    fetch(this._UrlCards, {
-    //        headers: this._headers,
-    //        body: JSON.stringify({
-    //            name: Data.name,
-    //            link: Data.link
-    //        })
-    //    })
-    //        .then(res => {
-    //            if (res.ok) {
-    //                return res.json()
-    //            }
-    //            else {
-    //                return Promise.reject(`Ошибка: ${res.status}`);
-    //            }
-    //        })
-    //        .then((result) => {
-    //            card = result;
-    //        })
-    //        .catch((err) => {
-    //            console.log(`Карточка не найдена: ${err}`);
-    //        });
-    //    return card;
-    //}
-
-
-    addCard (Data, renderCard) {
+    addCard (Data) {
+        this._renderLoad(this._popupAddCadrButton, true, 'Сохранить');
         fetch(this._UrlCards, {
             method: 'POST',
             headers: this._headers,
@@ -146,10 +133,13 @@ export class Api {
                 }
             })
             .then((result) => {
-               renderCard(result, this._myId);
+               this._addNewCard(result, this._myId);
             })
             .catch((err) => {
                 console.log(`Добавление карточки не выполнено: ${err}`);
+            })
+            .finally(() => {
+                this._renderLoad(this._popupAddCadrButton, false, 'Сохранить');
             });
     }
 
@@ -169,14 +159,14 @@ export class Api {
                 }
             })
             .then(() => {
-                callback(card);
+                this._deleteOneCard(card);
             })
             .catch((err) => {
                 console.log(`Удаление карточки не выполнено: ${err}`);
             });
     }
 
-    setLikeCard (cardId, elementLike, LikeNumber, callback) {
+    setLikeCard (cardId, elementLike, LikeNumber) {
         fetch(`${this._UrlCards}/${cardId}/Likes`, {
             method: 'PUT',
             headers: this._headers,
@@ -190,11 +180,11 @@ export class Api {
                 }
             })
             .then((result) => {
-                callback(result, elementLike, LikeNumber);
+                this._isLike(result, elementLike, LikeNumber);
             });
     }
 
-    deleteLikeCard (cardId, elementLike, LikeNumber, callback) {
+    deleteLikeCard (cardId, elementLike, LikeNumber) {
         fetch(`${this._UrlCards}/${cardId}/Likes`, {
             method: 'DELETE',
             headers: this._headers,
@@ -208,7 +198,17 @@ export class Api {
                 }
             })
             .then((result) => {
-                callback(result, elementLike, LikeNumber);
+                this._notLike(result, elementLike, LikeNumber);
             })
     }
+
+    _renderLoad (popupButton, isLoad, text) {
+        if (isLoad) {
+            popupButton.textContent = 'Сохранение...'
+        }
+        else {
+            popupButton.textContent = text;
+        }
+    }
+    
 }

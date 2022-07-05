@@ -10,6 +10,7 @@
     background-size: cover;
     opacity: 1;
     transition: opacity 1s ease-out;
+    visibility: hidden;
 }
 
 .element__trash:hover {

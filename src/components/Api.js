@@ -1,10 +1,12 @@
 export class Api {
     constructor ({baseUrl, headers}) {
         this._UrlProfile = `${baseUrl}/users/me`;
+        this._UrlAvatar = `${baseUrl}/users/me/avatar`;
         this._UrlCards = `${baseUrl}/cards`;
         this._headers = headers;
         this._editProfileName = document.querySelector('.profile-info__name');
         this._editProfileDescription = document.querySelector('.profile-info__description');
+        this._avatar = document.querySelector('.profile__avatar');
         this._myId = '';
     }
 
@@ -23,6 +25,7 @@ export class Api {
             .then((result) => {
                 this._editProfileName.textContent = result.name;
                 this._editProfileDescription.textContent = result.about;
+                this._avatar.src = result.avatar;
                 this._myId = result._id;
             })
             .then(() => {
@@ -52,6 +55,27 @@ export class Api {
             })
             .catch((err) => {
                 console.log(`Данные профиля не установлены: ${err}`);
+            });
+    }
+
+    changeAvatar (formData) {
+        fetch(this._UrlAvatar, {
+            method: 'PATCH',
+            headers: this._headers,
+            body: JSON.stringify({
+                avatar: formData['avatar-src'],
+            })
+        })
+            .then(res => {
+                if (res.ok) {
+                    return res.json()
+                }
+                else {
+                    return Promise.reject(`Ошибка: ${res.status}`);
+                }
+            })
+            .catch((err) => {
+                console.log(`Аватар не изменен: ${err}`);
             });
     }
 

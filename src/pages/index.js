@@ -12,6 +12,8 @@ import { PopupWithButton } from '../components/popupWithButton';
 
 const content = document.querySelector('.content');
 const elements = content.querySelector('.elements');
+const avatar = content.querySelector('.profile__avatar')
+const editAvatar = content.querySelector('.profile__avatar-cover');
 const editButton = content.querySelector('.profile-info__edit-button');
 const addButton = content.querySelector('.profile__add-button');
 const popupEditProfileName = document.querySelector('.popup__input_profile_name');
@@ -25,6 +27,13 @@ const cardList = new Section({renderer: (item, myId) => {
 
 const popupWithImg = new PopupWithImage('.popup_img');
 
+const popupEditAvatar = new PopupWithForm('.popup_avatar', (formData) => {
+    api.changeAvatar(formData);
+    avatar.src = formData['avatar-src'];
+    formValidators['avatar'].resetValidation();
+    popupEditAvatar.close();
+});
+popupEditAvatar.setEventListeners();
 
 const popupEditProfile = new PopupWithForm('.popup_profile', (formData) => {
     userInfo.setUserInfo(formData);
@@ -116,6 +125,10 @@ function createCard (item, myId) {
 
 //cardList.renderItems();
 popupWithImg.setEventListeners();
+editAvatar.addEventListener('click', () => {
+    formValidators['avatar'].resetValidation();
+    popupEditAvatar.open();
+})
 editButton.addEventListener('click', () => {
     formValidators['profile'].resetValidation();
     const formData = userInfo.getUserInfo();

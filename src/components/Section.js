@@ -1,6 +1,5 @@
 export class Section {
     constructor ({renderer}, container) {
-        //this._renderedItems = items;
         this._container = container;
         this._renderer = renderer;        
     }

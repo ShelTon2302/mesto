@@ -11,7 +11,6 @@ import { Api } from '../components/Api.js';
 
 const content = document.querySelector('.content');
 const elements = content.querySelector('.elements');
-const avatar = content.querySelector('.profile__avatar')
 const editAvatar = content.querySelector('.profile__avatar-cover');
 const editButton = content.querySelector('.profile-info__edit-button');
 const addButton = content.querySelector('.profile__add-button');
@@ -22,7 +21,6 @@ const popupAddCadrButton = document.querySelector('.popup__save-button_add-eleme
 const formValidators = {};
 
 const cardList = new Section({renderer: (item, myId) => {
-    console.log(myId, 'cardlist')
     cardList.addItem(createCard(item, myId), true);
 }}, elements);
 
@@ -38,10 +36,6 @@ const popupEditAvatar = new PopupWithForm('.popup_avatar', (formData) => {
         .catch((err) => {
             console.log(`Аватар не изменен: ${err}`);
         });
-;
-    avatar.src = formData['avatar-src'];
-    formValidators['avatar'].resetValidation();
-    popupEditAvatar.close();
 });
 popupEditAvatar.setEventListeners();
 
@@ -117,13 +111,12 @@ const api = new Api ({
 
 Promise.all([api.getProfileInfo(), api.getInitialCards()])
     .then(([userData, initialCards]) => {
-        console.log(userData, initialCards, myId);
         userInfo.setUserInfo(userData);
         cardList.renderItems(initialCards, myId);
     })
     .catch((err) => {
         console.log(`Карточки не загружены: ${err}`);
-    })
+    });
 
 function beginValidation(obj) {
     const formList = Array.from(document.querySelectorAll(obj.formSelector));
@@ -157,6 +150,9 @@ function createCard (item, myId) {
                 .then((result) => {
                     elementLike.classList.remove('element__like_active');
                     LikeNumber.textContent = result.likes.length;
+                })
+                .catch((err) => {
+                    console.log(`Like с карточки не снят: ${err}`);
                 });
         }
         else {
@@ -164,6 +160,9 @@ function createCard (item, myId) {
                 .then((result) => {
                     elementLike.classList.add('element__like_active');
                     LikeNumber.textContent = result.likes.length;
+                })
+                .catch((err) => {
+                    console.log(`Like карточки не добавлен: ${err}`);
                 });
 ;
         }
@@ -191,7 +190,6 @@ addButton.addEventListener('click', () => {
     popupAddElement.open();
 });
 
-console.log(addButton);
 beginValidation({
     formSelector: '.popup__form',
     inputSelector: '.popup__input',

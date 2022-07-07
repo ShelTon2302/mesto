@@ -54,12 +54,13 @@
       if (this._liked) {
         this._elementLike.classList.add('element__like_active');
       }
-      this._setEventListeners();
-    
       this._element.querySelector('.element__title').textContent = this._name;
       this._elementImage.src = this._src;
       this._elementImage.alt = this._name;
       this._elementLikeNumber.textContent = this._likeNumber;
+      
+      this._setEventListeners();
+
       return this._element;
       }
 }
